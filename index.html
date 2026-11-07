@@ -16,7 +16,19 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
-<!-- АНАЛИТИКА: сюда вставить код счётчика Яндекс Метрики / Google Analytics -->
+<script data-goatcounter="https://ataimadaliev.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+<script>
+function gc(path,title){try{if(window.goatcounter&&window.goatcounter.count)window.goatcounter.count({path:path,title:title||path,event:true})}catch(_){}}
+document.addEventListener('DOMContentLoaded',function(){
+  var names={about:'Обо мне',services:'Услуги',compare:'Без меня / со мной',prices:'Тарифы',calc:'Калькулятор',reviews:'Отзывы',faq:'FAQ',contact:'Финальный призыв'};
+  if('IntersectionObserver'in window){var seen={};var io=new IntersectionObserver(function(es){es.forEach(function(e){var id=e.target.id;if(e.isIntersecting&&!seen[id]){seen[id]=1;io.unobserve(e.target);setTimeout(function(){gc('blok/'+id,'Блок: '+names[id])},1500)}})},{rootMargin:'-45% 0px -45% 0px'});
+  Object.keys(names).forEach(function(id){var el=document.getElementById(id);if(el)io.observe(el)})}
+  document.addEventListener('click',function(e){var a=e.target.closest('a,button');if(!a)return;
+    if(a.dataset&&a.dataset.form)gc('forma-otkryta/'+a.dataset.form,'Форма открыта: '+a.dataset.form);
+    else if(a.id==='calcOpen')gc('kalkulyator-otkryt','Калькулятор открыт');
+    else if(a.href&&/t\.me\//.test(a.href))gc('klik/telegram/'+a.href.split('t.me/')[1],'Клик: Telegram '+a.href.split('t.me/')[1]);
+    else if(a.href&&/instagram|tiktok/.test(a.href))gc('klik/'+(/instagram/.test(a.href)?'instagram':'tiktok'),'Клик: соцсеть')},true)});
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Krona+One&display=swap" rel="stylesheet">
@@ -858,6 +870,7 @@ function openForm(type,pkg){
     if(pkg)data.package=pkg;
     let ok=false;
     try{const r=await fetch(ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(data)});ok=r.ok}catch(_){}
+    gc(ok?'zayavka-otpravlena/'+f.title:'zayavka-oshibka/'+f.title,(ok?'Заявка отправлена: ':'Ошибка отправки: ')+f.title);
     F.inner.innerHTML=ok
      ?`<div class="f-done"><div class="ok"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#E0393E" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div><h3>Заявка отправлена</h3><p>Спасибо, ${esc(name)}! Вот что будет дальше:</p>
       <ol class="next">${(f.title==='Консультация'?['Напишу тебе в Telegram в течение дня','Договоримся о времени и пришлю ссылку на Zoom','На созвоне разберём твою ситуацию и составим план']:['Напишу тебе в Telegram в течение дня','Созвонимся на 15–20 минут и обсудим твою ситуацию','Предложу формат и пришлю договор'] ).map((t,k)=>`<li><b>${k+1}</b><span>${t}</span></li>`).join('')}</ol>

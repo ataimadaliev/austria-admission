@@ -2,6 +2,9 @@
 <html lang="ru">
 <head>
 <meta charset="utf-8">
+<meta name="color-scheme" content="dark">
+<style>html{background:#0a0a0b}html.pre-intro body>*:not(#intro){visibility:hidden}</style>
+<script>try{if(sessionStorage.getItem('introSeen')!=='1'&&!matchMedia('(prefers-reduced-motion: reduce)').matches){document.documentElement.classList.add('pre-intro');setTimeout(function(){document.documentElement.classList.remove('pre-intro')},6000)}}catch(e){}</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Атай Мадалиев — поступление в Австрию</title>
 <meta name="description" content="Поступление и переезд в Австрию с тем, кто прошёл этот путь сам. 10+ студентов из 6 стран уже учатся в Вене.">
@@ -67,7 +70,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .dots i:nth-child(2){background:var(--text)}
 
 /* ---------- intro (impact) ---------- */
-#intro{position:fixed;inset:0;z-index:100;overflow:hidden}
+#intro{position:fixed;inset:0;z-index:100;overflow:hidden;background:#0a0a0b}
 #intro.gone{display:none}
 #icam{position:absolute;inset:-20px;transition:opacity .9s ease}
 #iwall,#ifx{position:absolute;inset:0;width:100%;height:100%}
@@ -747,8 +750,8 @@ document.getElementById('stages').innerHTML=STAGES.map((s,i)=>`
 (function(){
   const intro=document.getElementById('intro');
   let seen=false;try{seen=sessionStorage.getItem('introSeen')==='1'}catch(e){}
-  if(seen||matchMedia('(prefers-reduced-motion: reduce)').matches){intro.classList.add('gone');document.body.classList.add('ready');return}
-  document.body.classList.add('intro-run');document.body.style.overflow='hidden';scrollTo(0,0);
+  if(seen||matchMedia('(prefers-reduced-motion: reduce)').matches){intro.classList.add('gone');document.body.classList.add('ready');document.documentElement.classList.remove('pre-intro');return}
+  document.body.classList.add('intro-run');document.documentElement.classList.remove('pre-intro');document.body.style.overflow='hidden';scrollTo(0,0);
   const cam=document.getElementById('icam'),wall=document.getElementById('iwall'),fx=document.getElementById('ifx'),wx=wall.getContext('2d'),fxx=fx.getContext('2d'),grp=document.getElementById('igrp'),L1el=document.getElementById('iL1');
   const DPR=Math.min(devicePixelRatio||1,2);let W,H,parts=[],shake=0,raf,done=false;const tm=[];const T=(f,ms)=>tm.push(setTimeout(f,ms));
   function size(){W=cam.clientWidth;H=cam.clientHeight;[wall,fx].forEach(c=>{c.width=W*DPR;c.height=H*DPR});

@@ -356,13 +356,13 @@ footer{border-top:1px solid var(--line);padding:36px 0 40px;color:var(--muted);f
 .foot .copy{border-top:1px solid var(--line);padding-top:20px;color:var(--dim);font-size:13px}
 
 /* ---------- form overlay ---------- */
-#form{position:fixed;inset:0;z-index:90;background:var(--bg);display:flex;flex-direction:column;opacity:0;visibility:hidden;transition:.3s}
+#form{position:fixed;top:0;left:0;right:0;height:100%;height:100dvh;z-index:90;background:var(--bg);display:flex;flex-direction:column;opacity:0;visibility:hidden;transition:.3s}
 #form.open{opacity:1;visibility:visible}
 .f-top{display:flex;align-items:center;justify-content:space-between;height:60px;padding:0 20px;border-bottom:1px solid var(--line)}
 .f-progress{height:2px;background:var(--line)}
 .f-progress i{display:block;height:100%;width:0;background:var(--red);transition:width .35s}
-.f-body{flex:1;overflow:auto;display:flex;align-items:center;padding:24px 20px}
-.f-inner{width:100%;max-width:560px;margin:0 auto}
+.f-body{flex:1;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;display:flex;padding:24px 20px}
+.f-inner{width:100%;max-width:560px;margin:auto}
 .f-note{border:1px solid var(--red-line);background:var(--red-soft);border-radius:12px;padding:10px 14px;font-size:13.5px;color:#f0c9ca;margin-bottom:28px}
 .f-step{display:none}
 .f-step.on{display:block;animation:fin .35s ease}
@@ -908,10 +908,18 @@ function openForm(type,pkg){
       <div class="wait"><p>Пока ждёшь — в моём Telegram‑канале много полезного про поступление в Австрию.</p><a class="btn btn-ghost" href="https://t.me/ataimadaliev">Открыть Telegram‑канал</a><a class="btn-link" href="https://t.me/atai_madaliev">или написать мне сразу →</a></div></div>`
      :`<div class="f-done"><h3>Не получилось отправить</h3><p>Похоже, проблема со связью. Напиши мне напрямую в Telegram — отвечу в течение дня.</p><a class="btn btn-red" href="https://t.me/atai_madaliev">Написать в Telegram</a></div>`;
   };
-  F.el.classList.add('open');document.body.style.overflow='hidden';F.el.querySelector('.f-body').scrollTop=0;
+  F.el.classList.add('open');lockScroll();F.el.querySelector('.f-body').scrollTop=0;
 }
 function esc(s){return s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
-function closeForm(){F.el.classList.remove('open');document.body.style.overflow=''}
+let lockY=0;
+function lockScroll(){lockY=window.scrollY;const b=document.body.style;b.position='fixed';b.top=-lockY+'px';b.left='0';b.right='0';b.width='100%';b.overflow='hidden'}
+function unlockScroll(){const b=document.body.style;b.position='';b.top='';b.left='';b.right='';b.width='';b.overflow='';document.documentElement.style.scrollBehavior='auto';window.scrollTo(0,lockY);document.documentElement.style.scrollBehavior=''}
+function closeForm(){F.el.classList.remove('open');unlockScroll()}
+/* iPhone: при открытой клавиатуре держим анкету ровно в видимой области экрана */
+if(window.visualViewport){const vv=window.visualViewport;const fit=()=>{if(!F.el.classList.contains('open'))return;F.el.style.height=vv.height+'px';F.el.style.transform='translateY('+vv.offsetTop+'px)'};
+  vv.addEventListener('resize',fit);vv.addEventListener('scroll',fit);
+  const _o=lockScroll;lockScroll=function(){_o();fit()};
+  const _c=unlockScroll;unlockScroll=function(){F.el.style.height='';F.el.style.transform='';_c()}}
 document.getElementById('fClose').onclick=closeForm;
 addEventListener('keydown',e=>{if(e.key==='Escape'&&F.el.classList.contains('open'))closeForm()});
 document.querySelectorAll('[data-form]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();menu.classList.remove('open');openForm(a.dataset.form,a.dataset.pkg)}));

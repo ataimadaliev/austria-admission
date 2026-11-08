@@ -294,10 +294,12 @@ section{padding:72px 0}
 .price.main .badge{border-color:var(--red-line);color:var(--red)}
 .consult-row{display:flex;flex-direction:column;gap:16px;padding:22px}
 .consult-row .amount{font-size:30px;font-weight:800;letter-spacing:-.03em}
-.consult-row p{color:var(--muted);font-size:15px}
+.consult-row p{color:var(--muted);font-size:15px}.consult-row .c-what{color:#dcdcd8;margin-top:6px}.c-list{margin-top:12px;font-size:14.5px;color:var(--muted)}.c-list b{display:block;color:#dcdcd8;font-weight:600;margin-bottom:6px}.c-list ul{margin:0;padding-left:18px;display:grid;gap:4px}.consult-row .c-topics{font-size:14.5px;margin-top:8px}.consult-row .c-note{font-size:13.5px;margin-top:12px}
 .pay-note{text-align:center;color:var(--dim);font-size:14px;margin-top:18px}
 
 /* ---------- reviews ---------- */
+.ab{display:grid;gap:8px;margin:0 0 14px;padding:12px 14px;border-radius:12px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.07);font-size:14px;line-height:1.45;color:#cfcfca}.ab i{display:block;font-style:normal;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:2px}.ab div+div{padding-top:8px;border-top:1px solid rgba(255,255,255,.07)}.ab div+div i{color:#E0393E}
+.rev-more{display:none}.revs.open .rev-more{display:block}.revs-more-wrap{text-align:center;margin-top:18px}.revs.open+.revs-more-wrap{display:none}
 .rev{padding:22px 20px}
 .rev-head{display:flex;align-items:center;gap:12px;margin-bottom:14px}
 .ava{width:44px;height:44px;border-radius:50%;background:var(--surface2);border:1px solid var(--line);display:grid;place-items:center;font-weight:700;flex:0 0 auto}
@@ -414,10 +416,11 @@ footer{border-top:1px solid var(--line);padding:36px 0 40px;color:var(--muted);f
   .about-text{padding:40px 36px}
   .grid.two{grid-template-columns:1fr 1fr}
   .grid.three{grid-template-columns:repeat(3,1fr)}
-  .grid.revs{grid-template-columns:1fr 1fr;max-width:880px;margin-left:auto;margin-right:auto}
+  .grid.revs{grid-template-columns:repeat(3,1fr)}
   .stage .sides{display:grid;grid-template-columns:1fr 1fr;gap:10px}
   .stage .side{margin-bottom:0}
-  .consult-row{flex-direction:row;align-items:center;justify-content:space-between;padding:26px 30px}
+  .consult-row{flex-direction:row;align-items:flex-end;justify-content:space-between;gap:30px;padding:26px 30px}
+  .consult-row .btn{flex-shrink:0}
   .final{padding:48px;text-align:center}
   .final .btns{flex-direction:row;justify-content:center}
   .foot{grid-template-columns:2fr 1fr 1fr}
@@ -559,8 +562,11 @@ footer{border-top:1px solid var(--line);padding:36px 0 40px;color:var(--muted);f
       </div>
     </div>
     <div class="card consult-row reveal" style="margin-top:12px">
-      <div><div class="eyebrow" style="justify-content:flex-start;margin-bottom:8px">Не готов к пакету?</div><div class="amount">50 € <span style="font-size:16px;font-weight:500;color:var(--muted);letter-spacing:0">/ 60 минут</span></div><p>Консультация: пошаговый план под твою ситуацию. Стоимость вычитается из любого пакета.</p></div>
-      <a class="btn btn-ghost" href="#" data-form="consult">Записаться</a>
+      <div><div class="eyebrow" style="justify-content:flex-start;margin-bottom:8px">Не готов к пакету?</div><div class="amount">50 € <span style="font-size:16px;font-weight:500;color:var(--muted);letter-spacing:0">· консультация</span></div>
+        <p class="c-what">Созвон в Zoom до 60 минут + файл по итогам: план поступления, подборка программ или что нужно под твой запрос.</p>
+        <p class="c-topics">Разберём, например: какие вузы подходят, какие документы нужны под твою страну, сроки, ВНЖ, подкурс и не только.</p>
+        <p class="c-note">Стоимость вычитается из пакета, если решишь идти дальше.</p></div>
+      <a class="btn btn-ghost" href="#" data-form="consult">Записаться на консультацию</a>
     </div>
     <p class="pay-note reveal">Оплата пакетов — в два этапа.</p>
   </div>
@@ -606,29 +612,41 @@ footer{border-top:1px solid var(--line);padding:36px 0 40px;color:var(--muted);f
     <div class="grid revs">
       <div class="card rev reveal">
         <div class="rev-photo"><img src="yulia.jpg" alt="Юлия и Атай в Вене" loading="lazy"></div>
-        <div class="rev-head"><div class="ava">Ю</div><div><b>Юлия</b><span>Россия · подкурс Uni Wien → бакалавриат Publizistik‑ und Kommunikationswissenschaft</span></div></div>
+        <div class="rev-head"><div class="ava">Ю</div><div><b>Юлия</b><span>Россия · цель: Publizistik‑ und Kommunikations&shy;wissenschaft</span></div></div>
+        <div class="ab"><div><i>Было</i>Диплом российского вуза и немецкий B1. Не знала, как собрать документы без дозапросов, оформить ВНЖ и что делать после приезда.</div><div><i>Стало</i>Учится на подкурсе Uni Wien в группе B2, дальше — бакалавриат.</div></div>
         <div class="stars">★★★★★</div>
         <blockquote>Атай, спасибо тебе огромное, что помогал во всём и отвечал на все мои вопросы! Я очень рада, что всё получилось — и без стрессовых ситуаций. Всё было структурировано, чётко и по плану 🤝 Благодаря твоей работе я исполнила свою мечту!</blockquote>
       </div>
       <div class="card rev reveal">
         <div class="rev-photo"><img src="kemal.jpg" alt="Кемал и Атай в Вене" loading="lazy"></div>
-        <div class="rev-head"><div class="ava">К</div><div><b>Кемал</b><span>Туркменистан · подкурс Uni Wien → бакалавриат Betriebswirtschaft</span></div></div>
+        <div class="rev-head"><div class="ava">К</div><div><b>Кемал</b><span>Туркменистан · цель: Betriebswirtschaft</span></div></div>
+        <div class="ab"><div><i>Было</i>Диплом вуза в Туркменистане и немецкий B1, цель — второй бакалавриат в Вене.</div><div><i>Стало</i>Получил ВНЖ и с летнего семестра 2026 учится на подкурсе Uni Wien.</div></div>
         <div class="stars">★★★★★</div>
         <blockquote>Поступление в Австрию — важный этап в моей жизни, и я очень благодарен за помощь. Благодаря поддержке весь процесс стал понятным и структурированным. Атай всегда был на связи, подробно объяснял каждый шаг и помог избежать ошибок.</blockquote>
       </div>
       <div class="card rev reveal">
         <div class="rev-photo"><img src="aisholpan.jpg" alt="Айшолпан и Атай в Вене" loading="lazy"></div>
-        <div class="rev-head"><div class="ava">А</div><div><b>Айшолпан</b><span>Казахстан · подкурс Uni Wien → Statistik, параллельно нострификация диплома</span></div></div>
+        <div class="rev-head"><div class="ava">А</div><div><b>Айшолпан</b><span>Казахстан · цель: нострификация медицинского диплома</span></div></div>
+        <div class="ab"><div><i>Было</i>Медицинский диплом из Казахстана и немецкий около B2. Хотела проходить нострификацию уже в Австрии и доучить немецкий до C1.</div><div><i>Стало</i>С летнего семестра 2026 учится на подкурсе Uni Wien и ждёт решения по нострификации диплома.</div></div>
         <div class="stars">★★★★★</div>
         <blockquote>Переезд в другую страну — всегда большой стресс. Я очень рада, что взяла сопровождение у Атая. Он чётко объяснил весь процесс, помог с документами, ВНЖ и жильём. После переезда был рядом на каждом этапе. Очень рекомендую!</blockquote>
       </div>
-      <div class="card rev reveal">
+      <div class="card rev reveal rev-more">
         <div class="rev-photo"><img src="student4.jpg" alt="Айтжан и Атай в Вене" loading="lazy"></div>
-        <div class="rev-head"><div class="ava">А</div><div><b>Айтжан</b><span>Казахстан · подкурс MedUni Wien → Zahnmedizin</span></div></div>
+        <div class="rev-head"><div class="ava">А</div><div><b>Айтжан</b><span>Казахстан · цель: Zahnmedizin, MedUni Wien</span></div></div>
+        <div class="ab"><div><i>Было</i>Выпускник 11 класса 2026 года. Цель — успеть на подкурс уже осенью, с приглашением от MedUni Wien.</div><div><i>Стало</i>Успел на подкурс без потери семестра и учится с приглашением от MedUni Wien.</div></div>
         <div class="stars">★★★★★</div>
         <blockquote>Спасибо Атаю за помощь с поступлением в Австрию! Помогал со сбором и оформлением документов, всё объяснял и сопровождал на каждом этапе. Всё прошло чётко и без проблем. Рекомендую!</blockquote>
       </div>
+      <div class="card rev reveal rev-more">
+        <div class="rev-photo"><img src="bayel.jpg" alt="Байэл и Атай в Вене" loading="lazy"></div>
+        <div class="rev-head"><div class="ava">Б</div><div><b>Байэл</b><span>Кыргызстан · цель: Statistik und Data Analytics</span></div></div>
+        <div class="ab"><div><i>Было</i>Немецкий A2 и желание учиться в Вене.</div><div><i>Стало</i>Поступил на подкурс Uni Wien, получил ВНЖ и учится в Вене.</div></div>
+        <div class="stars">★★★★★</div>
+        <blockquote>Хочу поблагодарить Атая за помощь с поступлением в Вену! Он провёл меня через весь процесс — от документов до финального результата. Профессионально, понятно и без лишнего стресса. Рекомендую!</blockquote>
+      </div>
     </div>
+    <div class="revs-more-wrap"><button class="btn btn-ghost" id="revsMore" type="button">Показать ещё отзывы</button></div>
   </div>
 </section>
 
@@ -639,9 +657,10 @@ footer{border-top:1px solid var(--line);padding:36px 0 40px;color:var(--muted);f
     <h2 class="h2 reveal">Частые вопросы</h2>
     <div class="faq reveal">
       <details><summary>Вы гарантируете поступление?</summary><p>Честно: гарантию дают сами университеты — на подготовительный курс берут всех, у кого правильно собраны документы. Поэтому я не продаю «гарантию». Я делаю так, чтобы документы были собраны правильно с первого раза, ты успел по срокам, не переплатил посредникам и спокойно переехал в Австрию.</p></details>
+      <details><summary>Я родитель. Кто поможет ребёнку на месте, в Вене?</summary><p>Я живу в Вене, поэтому в полном пакете встречаю студента лично и помогаю с первыми днями: прописка, банк, страховка, ВНЖ. Дальше остаюсь на связи и помогаю, если что-то идёт не так.</p><p>Родители могут быть на связи на всех этапах: до начала работы можно созвониться со мной и задать все вопросы. Если студенту ещё нет 18, договор заключается с родителями, а общежитие я подбираю среди тех, что принимают несовершеннолетних.</p></details>
       <details><summary>Могут ли отказать в ВНЖ?</summary><p>Отказы случаются редко. Чаще миграционная служба присылает дозапрос — если не хватает какого‑то документа или денег на счёте. Именно это я проверяю до подачи, чтобы свести риск дозапроса к минимуму и ты успел к началу учёбы. Все мои студенты 2025/26 учебного года получили ВНЖ в срок. Окончательное решение всегда за миграционной службой.</p></details>
       <details><summary>С какого уровня немецкого можно поступить?</summary><p>Можно начать с уровня A2 — тебя примут на подготовительный курс. Там сдаёшь экзамены и переходишь на основную программу.</p></details>
-      <details><summary>Сколько денег нужно для поступления?</summary><p>От 3000 до 6000 € на первичные расходы (документы, переводы, жильё, страховка). Для ВНЖ нужно показать деньги на счёте на год: до 24 лет — около 8 700 € (722,58 € в месяц), с 24 лет — около 15 700 € (1 308,39 € в месяц), данные на 2026 год. Расходы на жизнь в Вене — около 1000 € в месяц.</p></details>
+      <details><summary>Сколько денег нужно для поступления?</summary><p>От 3000 до 6000 € на первичные расходы (документы, переводы, жильё, страховка). Для ВНЖ нужно показать деньги на счёте на год: до 24 лет — около 8 700 € (722,58 € в месяц), с 24 лет — около 15 700 € (1 308,39 € в месяц), данные на 2026 год. Расходы на жизнь в Вене — около 1 000–1 200 € в месяц, точнее можно посчитать в калькуляторе выше.</p></details>
       <details><summary>Можно ли поступить в 16–17 лет?</summary><p>Да, можно. Для несовершеннолетних есть особенности в документах — разберём их на консультации.</p></details>
       <details><summary>Чем Австрия лучше Германии?</summary><p>В Австрии нет конкурса при поступлении, можно поступать с A2 и часто без вступительных экзаменов. В Германии — сложнее попасть даже на подкурс.</p></details>
       <details><summary>Есть ли программы на английском?</summary><p>Да, в Австрии есть программы бакалавриата и магистратуры на английском. Для поступления потребуется сертификат уровня B2 или выше (IELTS, TOEFL и др.).</p></details>
@@ -884,6 +903,10 @@ function closeForm(){F.el.classList.remove('open');document.body.style.overflow=
 document.getElementById('fClose').onclick=closeForm;
 addEventListener('keydown',e=>{if(e.key==='Escape'&&F.el.classList.contains('open'))closeForm()});
 document.querySelectorAll('[data-form]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();menu.classList.remove('open');openForm(a.dataset.form,a.dataset.pkg)}));
+</script>
+<script>
+(function(){var b=document.getElementById('revsMore');if(!b)return;var g=document.querySelector('.grid.revs');var n=g.querySelectorAll('.rev-more').length;b.textContent='Показать ещё '+n+' '+(n===1?'отзыв':(n<5?'отзыва':'отзывов'));
+b.addEventListener('click',function(){g.classList.add('open');g.querySelectorAll('.rev-more').forEach(function(c){c.classList.add('in')});if(window.gc)gc('otzyvy-raskryty','Отзывы раскрыты')})})();
 </script>
 </body>
 </html>

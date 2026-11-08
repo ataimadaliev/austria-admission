@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="color-scheme" content="dark">
 <style>html{background:#0a0a0b}html.pre-intro body>*:not(#intro){visibility:hidden}</style>
-<script>try{if(sessionStorage.getItem('introSeen')!=='1'&&!matchMedia('(prefers-reduced-motion: reduce)').matches){document.documentElement.classList.add('pre-intro');setTimeout(function(){document.documentElement.classList.remove('pre-intro')},6000)}}catch(e){}</script>
+<script>try{if(sessionStorage.getItem('introSeen')!=='1'&&!matchMedia('(prefers-reduced-motion: reduce)').matches){document.documentElement.classList.add('pre-intro');setTimeout(function(){document.documentElement.classList.remove('pre-intro')},9000)}}catch(e){}</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Атай Мадалиев — поступление в Австрию</title>
 <meta name="description" content="Поступление и переезд в Австрию с тем, кто прошёл этот путь сам. 10+ студентов из 6 стран уже учатся в Вене.">
@@ -757,7 +757,7 @@ document.getElementById('stages').innerHTML=STAGES.map((s,i)=>`
   const intro=document.getElementById('intro');
   let seen=false;try{seen=sessionStorage.getItem('introSeen')==='1'}catch(e){}
   if(seen||matchMedia('(prefers-reduced-motion: reduce)').matches){intro.classList.add('gone');document.body.classList.add('ready');document.documentElement.classList.remove('pre-intro');return}
-  document.body.classList.add('intro-run');document.documentElement.classList.remove('pre-intro');document.body.style.overflow='hidden';scrollTo(0,0);
+  document.body.classList.add('intro-run');document.body.style.overflow='hidden';scrollTo(0,0);
   const cam=document.getElementById('icam'),wall=document.getElementById('iwall'),fx=document.getElementById('ifx'),wx=wall.getContext('2d'),fxx=fx.getContext('2d'),grp=document.getElementById('igrp'),L1el=document.getElementById('iL1');
   const DPR=Math.min(devicePixelRatio||1,2);let W,H,parts=[],shake=0,raf,done=false;const tm=[];const T=(f,ms)=>tm.push(setTimeout(f,ms));
   function size(){W=cam.clientWidth;H=cam.clientHeight;[wall,fx].forEach(c=>{c.width=W*DPR;c.height=H*DPR});
@@ -777,9 +777,9 @@ document.getElementById('stages').innerHTML=STAGES.map((s,i)=>`
   L1el.innerHTML=html(c=>`<span class="sh">${c}</span><span class="fc">${c}</span>`);
   document.getElementById('iL2').innerHTML=['ATAI','MADALIEV'].map((w,li)=>`<div class="ln ${li?'b':'a'}">${w}</div>`).join('');
   const L=[...L1el.querySelectorAll('.ln>span')],S=[...document.querySelectorAll('#iL0 span')];L.forEach(s=>s.style.setProperty('--r',((Math.random()-.5)*10)+'deg'));
-  function finish(){if(done)return;done=true;cancelAnimationFrame(raf);tm.forEach(clearTimeout);intro.classList.add('gone');document.body.classList.remove('intro-run');document.body.style.overflow='';document.body.classList.add('ready');try{sessionStorage.setItem('introSeen','1')}catch(e){}}
+  function finish(){if(done)return;done=true;document.documentElement.classList.remove('pre-intro');cancelAnimationFrame(raf);tm.forEach(clearTimeout);intro.classList.add('gone');document.body.classList.remove('intro-run');document.body.style.overflow='';document.body.classList.add('ready');try{sessionStorage.setItem('introSeen','1')}catch(e){}}
   function fly(){
-    document.getElementById('iex').style.opacity=0;intro.style.transition='background-color .5s';intro.style.backgroundColor='transparent';
+    document.getElementById('iex').style.opacity=0;intro.style.transition='background-color .5s';intro.style.backgroundColor='transparent';document.documentElement.classList.remove('pre-intro');
     const lg=document.getElementById('brandTxt').getBoundingClientRect(),nm=L1el.getBoundingClientRect();
     const s=Math.max(.05,Math.min(lg.height/nm.height*1.9,.2));
     grp.style.transform=`translate(${lg.left-nm.left*s}px,${lg.top-nm.top*s-4}px) scale(${s})`;grp.style.opacity=0;cam.style.opacity=0;

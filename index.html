@@ -42,6 +42,7 @@ document.addEventListener('DOMContentLoaded',function(){
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+a,button,summary,.chip{touch-action:manipulation}
 body{background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.55;font-size:16px;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 a{color:inherit;text-decoration:none}
 img{display:block;max-width:100%}
@@ -95,10 +96,10 @@ header.scrolled{border-color:var(--line)}
 .brand{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:-.01em}
 .nav-right{display:flex;align-items:center;gap:4px}
 .icon{width:38px;height:38px;display:grid;place-items:center;border-radius:10px;color:var(--muted);transition:color .2s,background .2s}
-.icon:hover{color:var(--text);background:var(--white-soft)}
+@media (hover:hover){.icon:hover{color:var(--text);background:var(--white-soft)}}
 .icon svg{width:19px;height:19px}
 .nav-links{display:none;gap:26px;margin-right:18px;font-size:14px;color:var(--muted)}
-.nav-links a:hover{color:var(--text)}
+@media (hover:hover){.nav-links a:hover{color:var(--text)}}
 .btn.nav-cta{display:none}
 .brand{white-space:nowrap}
 #menu{position:fixed;inset:60px 0 auto 0;z-index:49;background:rgba(10,10,11,.97);border-bottom:1px solid var(--line);padding:8px 20px 22px;transform:translateY(-8px);opacity:0;visibility:hidden;transition:.25s}
@@ -112,12 +113,12 @@ header.scrolled{border-color:var(--line)}
 .btn:nth-child(2):after{animation-delay:1.4s}
 @keyframes shine{0%,62%{left:-60%}88%,100%{left:130%}}
 .btn svg.arr{width:16px;height:16px;transition:transform .3s}
-.btn:hover svg.arr{transform:translateX(3px)}
+@media (hover:hover){.btn:hover svg.arr{transform:translateX(3px)}}
 .btn:active{transform:scale(.98)}
 .btn-red{color:#fff;background:linear-gradient(180deg,#ef5156 0%,#d8343a 55%,#bf2a30 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.35),inset 0 -2px 6px rgba(0,0,0,.25),0 10px 30px -8px rgba(224,57,62,.65),0 0 0 1px rgba(255,120,120,.25)}
-.btn-red:hover{box-shadow:inset 0 1px 0 rgba(255,255,255,.4),inset 0 -2px 6px rgba(0,0,0,.25),0 14px 40px -8px rgba(224,57,62,.85),0 0 0 1px rgba(255,140,140,.35)}
+@media (hover:hover){.btn-red:hover{box-shadow:inset 0 1px 0 rgba(255,255,255,.4),inset 0 -2px 6px rgba(0,0,0,.25),0 14px 40px -8px rgba(224,57,62,.85),0 0 0 1px rgba(255,140,140,.35)}}
 .btn-ghost{color:var(--text);background:linear-gradient(180deg,#3a3a3f 0%,#26262a 55%,#1c1c20 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.18),inset 0 -2px 6px rgba(0,0,0,.35),0 10px 28px -10px rgba(0,0,0,.9),0 0 0 1px rgba(255,255,255,.08)}
-.btn-ghost:hover{background:linear-gradient(180deg,#45454b 0%,#2c2c31 55%,#202024 100%)}
+@media (hover:hover){.btn-ghost:hover{background:linear-gradient(180deg,#45454b 0%,#2c2c31 55%,#202024 100%)}}
 .btn-ghost:after{background:linear-gradient(100deg,transparent,rgba(255,255,255,.22),transparent)}
 .btn-sm{height:40px;padding:0 18px;font-size:14px}
 
@@ -164,7 +165,7 @@ section{padding:72px 0}
 .video-card img{width:100%;height:100%;object-fit:cover;filter:brightness(.55)}
 .video-card .play{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;text-align:center;padding:24px}
 .video-card .play i{width:76px;height:76px;border-radius:50%;background:var(--red);display:grid;place-items:center;box-shadow:0 0 0 10px rgba(224,57,62,.18);transition:transform .2s}
-.video-card:hover .play i{transform:scale(1.06)}
+@media (hover:hover){.video-card:hover .play i{transform:scale(1.06)}}
 .video-card .play i svg{width:28px;height:28px;margin-left:4px}
 .video-card .play b{font-size:20px;font-weight:700;letter-spacing:-.01em;max-width:280px;line-height:1.3}
 .video-card .play span{font-size:13px;color:#d8d8d4}
@@ -803,12 +804,12 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
   document.querySelectorAll('.svc,.stage,.price,.rev,.stat,.about-text').forEach(el=>{
     const on=()=>el.classList.add('lit');
     el.addEventListener('touchstart',on,{passive:true});
-    el.addEventListener('mouseenter',on);
+    el.addEventListener('pointerenter',e=>{if(e.pointerType==='mouse')on()});
   });
   document.querySelectorAll('.hero-photo,.rev-photo').forEach(el=>{
     const on=()=>el.classList.add('photo-lit');
     el.addEventListener('touchstart',on,{passive:true});
-    el.addEventListener('mouseenter',on);
+    el.addEventListener('pointerenter',e=>{if(e.pointerType==='mouse')on()});
   });
 })();
 
@@ -857,7 +858,7 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 const ENDPOINT='https://formspree.io/f/xkogpgzp';
 const EDU=['9–10 класс','11 класс','Окончил(а) школу','Учусь в вузе','Есть диплом'];
 const FORMS={
-  consult:{title:'Консультация',h:'Запись на консультацию',p:'50 € · 60 минут в Zoom. Напишу тебе в Telegram, чтобы договориться о времени.',note:null},
+  consult:{title:'Консультация',h:'Запись на консультацию',p:'50 € · до 60 минут в Zoom. Напишу тебе в Telegram, чтобы договориться о времени.',note:null},
   mentor:{title:'Сопровождение',h:'Заявка на сопровождение',p:'Напишу тебе в Telegram в течение дня, созвонимся и обсудим детали.',note:'Это заявка на платное сопровождение, а не на консультацию.'}
 };
 const F={el:document.getElementById('form'),inner:document.getElementById('fInner')};

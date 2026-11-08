@@ -361,6 +361,12 @@ footer{border-top:1px solid var(--line);padding:36px 0 40px;color:var(--muted);f
 /* ---------- form overlay ---------- */
 #form{position:fixed;top:0;left:0;right:0;height:100%;height:100dvh;z-index:90;background:var(--bg);display:flex;flex-direction:column;opacity:0;visibility:hidden;transition:.3s}
 #form.open{opacity:1;visibility:visible}
+/* анкета на телефоне: открывается как отдельная страница, чтобы клавиатура iPhone не ломала отображение */
+html.form-open body>*:not(#form){display:none!important}
+html.form-open #form{position:relative;top:auto;left:auto;right:auto;height:auto;min-height:100vh;min-height:100dvh;transform:none}
+html.form-open .f-top{position:sticky;top:0;z-index:2;background:var(--bg)}
+html.form-open .f-body{overflow:visible;flex:1 0 auto}
+
 .f-top{display:flex;align-items:center;justify-content:space-between;height:60px;padding:0 20px;border-bottom:1px solid var(--line)}
 .f-progress{height:2px;background:var(--line)}
 .f-progress i{display:block;height:100%;width:0;background:var(--red);transition:width .35s}
@@ -773,7 +779,7 @@ document.getElementById('stages').innerHTML=STAGES.map((s,i)=>`
   const L=[...L1el.querySelectorAll('.ln>span')],S=[...document.querySelectorAll('#iL0 span')];L.forEach(s=>s.style.setProperty('--r',((Math.random()-.5)*10)+'deg'));
   function finish(){if(done)return;done=true;cancelAnimationFrame(raf);tm.forEach(clearTimeout);intro.classList.add('gone');document.body.classList.remove('intro-run');document.body.style.overflow='';document.body.classList.add('ready');try{sessionStorage.setItem('introSeen','1')}catch(e){}}
   function fly(){
-    document.getElementById('iex').style.opacity=0;
+    document.getElementById('iex').style.opacity=0;intro.style.transition='background-color .5s';intro.style.backgroundColor='transparent';
     const lg=document.getElementById('brandTxt').getBoundingClientRect(),nm=L1el.getBoundingClientRect();
     const s=Math.max(.05,Math.min(lg.height/nm.height*1.9,.2));
     grp.style.transform=`translate(${lg.left-nm.left*s}px,${lg.top-nm.top*s-4}px) scale(${s})`;grp.style.opacity=0;cam.style.opacity=0;
@@ -911,18 +917,11 @@ function openForm(type,pkg){
       <div class="wait"><p>Пока ждёшь — в моём Telegram‑канале много полезного про поступление в Австрию.</p><a class="btn btn-ghost" href="https://t.me/ataimadaliev">Открыть Telegram‑канал</a><a class="btn-link" href="https://t.me/atai_madaliev">или написать мне сразу →</a></div></div>`
      :`<div class="f-done"><h3>Не получилось отправить</h3><p>Похоже, проблема со связью. Напиши мне напрямую в Telegram — отвечу в течение дня.</p><a class="btn btn-red" href="https://t.me/atai_madaliev">Написать в Telegram</a></div>`;
   };
-  F.el.classList.add('open');lockScroll();F.el.querySelector('.f-body').scrollTop=0;
+  formY=window.scrollY;F.el.classList.add('open');document.documentElement.classList.add('form-open');document.documentElement.style.scrollBehavior='auto';window.scrollTo(0,0);document.documentElement.style.scrollBehavior='';
 }
 function esc(s){return s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
-let lockY=0;
-function lockScroll(){lockY=window.scrollY;const b=document.body.style;b.position='fixed';b.top=-lockY+'px';b.left='0';b.right='0';b.width='100%';b.overflow='hidden'}
-function unlockScroll(){const b=document.body.style;b.position='';b.top='';b.left='';b.right='';b.width='';b.overflow='';document.documentElement.style.scrollBehavior='auto';window.scrollTo(0,lockY);document.documentElement.style.scrollBehavior=''}
-function closeForm(){F.el.classList.remove('open');unlockScroll()}
-/* iPhone: при открытой клавиатуре держим анкету ровно в видимой области экрана */
-if(window.visualViewport){const vv=window.visualViewport;const fit=()=>{if(!F.el.classList.contains('open'))return;F.el.style.height=vv.height+'px';F.el.style.transform='translateY('+vv.offsetTop+'px)'};
-  vv.addEventListener('resize',fit);vv.addEventListener('scroll',fit);
-  const _o=lockScroll;lockScroll=function(){_o();fit()};
-  const _c=unlockScroll;unlockScroll=function(){F.el.style.height='';F.el.style.transform='';_c()}}
+let formY=0;
+function closeForm(){F.el.classList.remove('open');document.documentElement.classList.remove('form-open');document.documentElement.style.scrollBehavior='auto';window.scrollTo(0,formY);document.documentElement.style.scrollBehavior=''}
 document.getElementById('fClose').onclick=closeForm;
 addEventListener('keydown',e=>{if(e.key==='Escape'&&F.el.classList.contains('open'))closeForm()});
 document.querySelectorAll('[data-form]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();menu.classList.remove('open');openForm(a.dataset.form,a.dataset.pkg)}));

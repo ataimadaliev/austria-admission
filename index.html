@@ -14,6 +14,7 @@
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ru_RU">
 <meta property="og:url" content="https://ataimadaliev.com/">
+<link rel="canonical" href="https://ataimadaliev.com/">
 <meta property="og:image" content="https://ataimadaliev.com/og.jpg">
 <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
@@ -144,7 +145,7 @@ section{padding:72px 0}
 .h2{font-size:clamp(28px,6.6vw,46px);font-weight:800;letter-spacing:-.03em;line-height:1.12;text-align:center;margin:16px auto 12px;max-width:760px}
 .lead{color:var(--muted);text-align:center;max-width:560px;margin:0 auto;font-size:16px}
 .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r)}
-.reveal{opacity:0;transform:translateY(28px) scale(.985);filter:blur(6px);transition:opacity 1s cubic-bezier(.16,1,.3,1),transform 1.1s cubic-bezier(.16,1,.3,1),filter 1s cubic-bezier(.16,1,.3,1)}
+.reveal{opacity:0;transform:translateY(22px) scale(.985);filter:blur(5px);transition:opacity .6s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1),filter .6s cubic-bezier(.16,1,.3,1)}
 .reveal.in{opacity:1;transform:none;filter:none}
 .red{color:var(--red)}
 
@@ -816,7 +817,7 @@ const lay=()=>{document.getElementById('heroPhotoMobile').style.display=mq.match
 lay();mq.addEventListener?mq.addEventListener('change',lay):mq.addListener(lay);
 
 /* ---------- reveal ---------- */
-const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12,rootMargin:'0px 0px -30px 0px'});
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:0,rootMargin:'0px 0px 12% 0px'});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
 /* ---------- highlight: light up on touch, stay lit ---------- */
